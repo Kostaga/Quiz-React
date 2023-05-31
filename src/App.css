@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F5F7FB;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 20px;
+  height: 90vh;
+  margin-top: auto; /* Add this line */
+  margin-bottom: auto; /* Add this line */
+}
+
+.menu h1 {
+  font-size: 3em;
+  color: #293264;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.menu h2 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.menu button {
+  margin-top: 30px;
+  font-size: 24px;
+  padding:  25px 80px;
+  border-radius: 20px;
+  background-color: #4D5B9E;
+  color: white;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.286);
+}
+
+.menu button:hover {
+  transform: scale(1.1);
+}
+
+.blob1 {
+  position: absolute;
+  bottom: -15%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  border-radius: 32%;
+  background-color: #DEEBF8;
+  transform: rotate(-40deg);
+  z-index: -1;
+}
+
+.blob2 {
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  border-radius: 32%;
+  background-color: #FFFAD1;
+  transform: rotate(-40deg);
+  z-index: -1;
+}
+
+.question {
+  z-index: 2;
+  padding: 20px;
+  margin-left: 300px;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+.question h2 {
+  font-size: 2em;
+  color: #293264;
+  font-weight: 500;
+}
+
+.answer {
+  margin-top: 35px;
+  padding: 12px 40px;
+  border-radius: 18px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 30px;
+  background-color: transparent;
+  color: #4D5B9E;
+  border: 1px solid #4D5B9E;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.answer:hover { 
+  transform: scale(1.1);
+}
+
+.question hr {
+  margin-top: 40px;
+  border: 1px solid #dbdef0a0;
+  width: 55vw;
+}
+
+.App .check {
+  position: absolute;
+  left: 45%;
+  margin-top: 30px;
+  font-size: 24px;
+  padding:  25px 80px;
+  border-radius: 20px;
+  background-color: #4D5B9E;
+  color: white;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.286);
+}
+
+.App .check:hover {
+  transform: scale(1.1);
+}
