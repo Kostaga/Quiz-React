@@ -1,26 +1,23 @@
 import React, { useEffect } from 'react';
+import {nanoid} from "nanoid"
+const Questions = ({question,allAnswers,correct,check,onCorrectAnswersUpdate,correctAnswers,setCorrectAnswers}) => {
 
-const Questions = ({question,allAnswers,correct,check,onCorrectAnswersUpdate}) => {
-
-	const [shuffleQuestions] = React.useState(() => {
-	return shuffleArray(allAnswers);
-});
+	const shuffleQuestions = React.useMemo(() => {
+		return shuffleArray(allAnswers);
+	  }, [allAnswers]);
 
 
 const [isSelected, setIsSelected] = React.useState(-1);
 
-const [correctAnswers, setCorrectAnswers] = React.useState(0);
-
 
 useEffect(() => {
-	if (check && isSelected !== -1) {
-		if (shuffleQuestions[isSelected] === correct) {
-			setCorrectAnswers(previous => previous + 1);
-		}
-
+	if (isSelected !== -1) {
+	  if (shuffleQuestions[isSelected] === correct) {
+		setCorrectAnswers((previous) => previous + 1);
+	  }
 	}
-}, [check,isSelected,shuffleQuestions,correct])
-
+  }, [check,isSelected, shuffleQuestions, correct, setCorrectAnswers]);
+  
 
 
 useEffect(() => {
@@ -69,7 +66,7 @@ function shuffleArray(array) {
 		}
 	 
 		return (
-			<button onClick={() => clickQuestion(index)} style={styles} type='text' className='answer'>{answer}</button>
+			<button key={nanoid()} onClick={() => clickQuestion(index)} style={styles} type='text' className='answer'>{answer}</button>
 		)
 	})
 

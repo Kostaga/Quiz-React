@@ -6,9 +6,6 @@ import {nanoid} from "nanoid"
 
 function App() {
 
-  // Score na ginetai epitelous
-  // play again na ta kanei reset ola
-  // formatting ligo ta dedomena na mh fainotnai etsi
 
   const [menu,setMenu] = useState(true);
 
@@ -20,24 +17,34 @@ function App() {
 
 //Use Effect to call the data from the API and store them to allQuestions variable
 
-  useEffect(() => {
-    if (!menu) {
-      fetch('https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple')
-        .then((res) => res.json())
-        .then((data) => {
-          const updatedQuestions = data.results.map((item) => ({
-            ...item,
-            id: nanoid(),
-            isClicked: false,
-            allAnswers: [item.correct_answer, ...item.incorrect_answers]
-          }));
-          setAllQuestions(updatedQuestions);
-        });
+useEffect(() => {
+  if (!menu) {
+    fetch(
+      'https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple'
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const updatedQuestions = data.results.map((item) => ({
+          ...item,
+          question: removeSpecialCharacters(item.question),
+          id: nanoid(),
+          isClicked: false,
+          allAnswers: [
+            removeSpecialCharacters(item.correct_answer),
+            ...item.incorrect_answers.map((answer) =>
+              removeSpecialCharacters(answer)
+            ),
+          ],
+        }));
+        setAllQuestions(updatedQuestions);
+      });
+  }
+}, [menu]);
 
-        
-    }
-  }, [menu]);
 
+const removeSpecialCharacters = (str) => {
+  return str.replace(/[^a-zA-Z0-9 ]/g, ' ').replace(/quot/g, '');
+};
 
   const handleClick = () => {
     setMenu(false)
@@ -45,8 +52,15 @@ function App() {
 
 
   const handleCheck = () => {
+    if (checkAnswers) {
+      setMenu(true);
+      setCorrectAnswers(0);
+      setcheckAnswers(false);
+    }
+    else {
     setcheckAnswers(previous => 
       !previous)
+    }
   }
 
 
@@ -77,8 +91,9 @@ const questionsArray = allQuestions.map((item) => {
     correct = {item.correct_answer}
     allAnswers={item.allAnswers}
     check = {checkAnswers}
+    correctAnswers={correctAnswers}
+    setCorrectAnswers={setCorrectAnswers}
     onCorrectAnswersUpdate={(value) => handleCorrectAnswersUpdate(value)}
-    id = {item.id}
     />
   )
 });
