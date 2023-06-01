@@ -6,10 +6,17 @@ import {nanoid} from "nanoid"
 
 function App() {
 
+  // Score na ginetai epitelous
+  // play again na ta kanei reset ola
+  // formatting ligo ta dedomena na mh fainotnai etsi
+
   const [menu,setMenu] = useState(true);
 
   const [allQuestions,setAllQuestions] = useState([]);
 
+  const [checkAnswers,setcheckAnswers] = useState(false);
+
+  const [correctAnswers, setCorrectAnswers] = React.useState(0);
 
 //Use Effect to call the data from the API and store them to allQuestions variable
 
@@ -37,6 +44,17 @@ function App() {
   }
 
 
+  const handleCheck = () => {
+    setcheckAnswers(previous => 
+      !previous)
+  }
+
+
+  const handleCorrectAnswersUpdate = (value) => {
+    setCorrectAnswers(value);
+  };
+
+
 //Blob conditional styles
 const blobStyles = {
   width: '500px',
@@ -51,8 +69,6 @@ const blobStyles2 = {
 }
 
 
-// Click να αλλάζει χρώμα η συγκεκριμένη απάντηση
-
 const questionsArray = allQuestions.map((item) => {
   return (
     <Questions 
@@ -60,6 +76,8 @@ const questionsArray = allQuestions.map((item) => {
     question = {item.question}
     correct = {item.correct_answer}
     allAnswers={item.allAnswers}
+    check = {checkAnswers}
+    onCorrectAnswersUpdate={(value) => handleCorrectAnswersUpdate(value)}
     id = {item.id}
     />
   )
@@ -71,7 +89,10 @@ const questionsArray = allQuestions.map((item) => {
 			<div style={menu ? null : blobStyles} className='blob2'></div>
       {menu && <Menu key={nanoid()} handleClick = {handleClick} />}
       {!menu && questionsArray}
-      {!menu  && <button className='check' type='text'>Check Answers</button>}
+      {!menu  && <button onClick={handleCheck} className='check' type='text'>{checkAnswers ? 'Play again' : 'Check Answers'}</button>}
+      <div className='results'>
+      {checkAnswers && <h2 className='score'>You scored {correctAnswers}/{allQuestions.length} correct answers</h2> }
+      </div>
 
       
     </div>
