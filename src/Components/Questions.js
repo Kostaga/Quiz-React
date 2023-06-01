@@ -16,7 +16,7 @@ useEffect(() => {
 		setCorrectAnswers((previous) => previous + 1);
 	  }
 	}
-  }, [check,isSelected, shuffleQuestions, correct, setCorrectAnswers]);
+  }, [isSelected, shuffleQuestions, correct, setCorrectAnswers]);
   
 
 
@@ -46,15 +46,21 @@ function shuffleArray(array) {
 	const answers = shuffleQuestions.map((answer,index) => {
 		let styles = {}
 		if (check) {
+
+
+			if (index !== isSelected && answer === correct) {
+				styles = {backgroundColor: '#94D7A2'}
+			}
 		
-			if (index !== isSelected)
+			else if (index !== isSelected)
 				styles = {backgroundColor: null}
-				
+
+			
 			else if (index === isSelected && answer === correct) {
 				styles = {backgroundColor: '#94D7A2'}
 			}
 			else
-				styles = {backgroundColor: '#F8BCBC'}
+				styles = {backgroundColor: 'rgba(248, 188, 188, 0.45)'}
 
 		}
 		else {
