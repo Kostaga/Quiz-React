@@ -16,7 +16,6 @@ function App() {
   const [correctAnswers, setCorrectAnswers] = React.useState(0);
 
 //Use Effect to call the data from the API and store them to allQuestions variable
-
 useEffect(() => {
   if (!menu) {
     fetch(

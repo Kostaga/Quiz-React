@@ -14,7 +14,6 @@ useEffect(() => {
 	if (isSelected !== -1 && check) {
 	  if (shuffleQuestions[isSelected] === correct) {
 		setCorrectAnswers(previous => previous + 1)
-		console.log('mphka');
 	  }
 	}
   }, [check,isSelected, shuffleQuestions, correct, setCorrectAnswers]);
