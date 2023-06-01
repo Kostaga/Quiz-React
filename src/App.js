@@ -20,7 +20,7 @@ function App() {
 useEffect(() => {
   if (!menu) {
     fetch(
-      'https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple'
+      'https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple'
     )
       .then((res) => res.json())
       .then((data) => {
@@ -30,10 +30,8 @@ useEffect(() => {
           id: nanoid(),
           isClicked: false,
           allAnswers: [
-            removeSpecialCharacters(item.correct_answer),
-            ...item.incorrect_answers.map((answer) =>
-              removeSpecialCharacters(answer)
-            ),
+            item.correct_answer,
+            ...item.incorrect_answers,
           ],
         }));
         setAllQuestions(updatedQuestions);
@@ -66,6 +64,7 @@ const removeSpecialCharacters = (str) => {
 
   const handleCorrectAnswersUpdate = (value) => {
     setCorrectAnswers(value);
+    console.log(correctAnswers);
   };
 
 
@@ -93,7 +92,7 @@ const questionsArray = allQuestions.map((item) => {
     check = {checkAnswers}
     correctAnswers={correctAnswers}
     setCorrectAnswers={setCorrectAnswers}
-    onCorrectAnswersUpdate={(value) => handleCorrectAnswersUpdate(value)}
+    onCorrectAnswersUpdate={() => handleCorrectAnswersUpdate}
     />
   )
 });

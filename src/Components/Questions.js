@@ -11,12 +11,13 @@ const [isSelected, setIsSelected] = React.useState(-1);
 
 
 useEffect(() => {
-	if (isSelected !== -1) {
+	if (isSelected !== -1 && check) {
 	  if (shuffleQuestions[isSelected] === correct) {
-		setCorrectAnswers((previous) => previous + 1);
+		setCorrectAnswers(previous => previous + 1)
+		console.log('mphka');
 	  }
 	}
-  }, [isSelected, shuffleQuestions, correct, setCorrectAnswers]);
+  }, [check,isSelected, shuffleQuestions, correct, setCorrectAnswers]);
   
 
 
@@ -48,19 +49,21 @@ function shuffleArray(array) {
 		if (check) {
 
 
-			if (index !== isSelected && answer === correct) {
+			if  (index === isSelected && answer === correct) {
+				styles = {backgroundColor: '#94D7A2'}
+			}
+
+			else if (index !== isSelected && answer === correct) {
 				styles = {backgroundColor: '#94D7A2'}
 			}
 		
 			else if (index !== isSelected)
 				styles = {backgroundColor: null}
 
-			
-			else if (index === isSelected && answer === correct) {
-				styles = {backgroundColor: '#94D7A2'}
-			}
-			else
+
+			else {
 				styles = {backgroundColor: 'rgba(248, 188, 188, 0.45)'}
+			}
 
 		}
 		else {
